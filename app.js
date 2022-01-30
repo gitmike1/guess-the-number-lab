@@ -11,23 +11,38 @@ const game = {
     let num = null
       while (num !== this.secretNum) {
         let num = this.getGuess()
-      this.prevGuesses.push(num)
+        this.prevGuesses.push(num)
+        this.render()
       console.log(game.prevGuesses)
       }
+       
   },
 
   getGuess: function() {
-    let guess = parseInt(prompt (`Enter a guess between ${this.smallestNum} and ${this.biggestNum}.`,)); 
-    //console.log(typeof guess)
-    //let num = parseInt(guess)
-    //console.log(typeof num)
+    let guess = null;
+    
     while (guess < this.smallestNum || guess > this.biggestNum) {
       guess = parseInt(prompt (`Enter a guess between ${this.smallestNum} and ${this.biggestNum}.`,));
     }
     //deal with NaN from non-number guess
   return guess
-  console.log("validInput")
+  },
+
+  render: function() {
+    let result = null;
+    if (this.prevGuesses[this.prevGuesses.length-1] > this.secretNum) {
+      result = `Your guess is too high. Previous guesses: ${this.prevGuesses.join("and")}`
+    
+    } else if (this.prevGuesses[this.prevGuesses.length-1] < this.secretNum) {
+    result = (`Your guess is too low. Previous guesses: ${this.prevGuesses.join("and")}`)
+    } else {
+    result = (`Congrats! You guessed the number in ${this.prevGuesses.length} attempts!`) 
+    }
+    alert(result)
   }
+  
 }
- //console.log(game.getGuess())
+
+
 game.play()
+
