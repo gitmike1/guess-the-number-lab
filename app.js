@@ -14,27 +14,31 @@ const game = {
         this.prevGuesses.push(num)
         this.render()
       console.log(game.prevGuesses)
+      console.log(game.biggestNum)
+      console.log(game.smallestNum)
       }
-       
-  },
-
-  getGuess: function() {
-    let guess = null;
+      
+      
+    },
     
-    while (guess < this.smallestNum || guess > this.biggestNum) {
-      guess = parseInt(prompt (`Enter a guess between ${this.smallestNum} and ${this.biggestNum}.`,));
-    }
-    //deal with NaN from non-number guess
-  return guess
-  },
-
-  render: function() {
-    let result = null;
-    if (this.prevGuesses[this.prevGuesses.length-1] > this.secretNum) {
-      result = `Your guess is too high. Previous guesses: ${this.prevGuesses.join("and")}`
+    getGuess: function() {
+      let guess = null;
+      
+      while (guess < this.smallestNum || guess > this.biggestNum) {
+        guess = parseInt(prompt (`Enter a guess between ${this.smallestNum} and ${this.biggestNum}.`,));
+      }
+      
+      return guess
+    },
     
-    } else if (this.prevGuesses[this.prevGuesses.length-1] < this.secretNum) {
-    result = (`Your guess is too low. Previous guesses: ${this.prevGuesses.join("and")}`)
+    render: function() {
+      let result = null;
+      if (this.prevGuesses[this.prevGuesses.length-1] > this.secretNum) {
+        result = `Your guess is too high. Previous guesses: ${this.prevGuesses.join(",")}`
+        this.biggestNum = this.prevGuesses[this.prevGuesses.length-1]
+      } else if (this.prevGuesses[this.prevGuesses.length-1] < this.secretNum) {
+        result = (`Your guess is too low. Previous guesses: ${this.prevGuesses.join(",")}`)
+        this.smallestNum = this.prevGuesses[this.prevGuesses.length-1]
     } else {
     result = (`Congrats! You guessed the number in ${this.prevGuesses.length} attempts!`) 
     }
