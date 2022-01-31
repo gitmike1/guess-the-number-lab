@@ -24,7 +24,7 @@ const game = {
     getGuess: function() {
       let guess = null;
       
-      while (guess < this.smallestNum || guess > this.biggestNum) {
+      while (isNaN(guess) || guess < this.smallestNum || guess > this.biggestNum) {
         guess = parseInt(prompt (`Enter a guess between ${this.smallestNum} and ${this.biggestNum}.`,));
       }
       
@@ -39,8 +39,8 @@ const game = {
       } else if (this.prevGuesses[this.prevGuesses.length-1] < this.secretNum) {
         result = (`Your guess is too low. Previous guesses: ${this.prevGuesses.join(",")}`)
         this.smallestNum = this.prevGuesses[this.prevGuesses.length-1]
-    } else {
-    result = (`Congrats! You guessed the number in ${this.prevGuesses.length} attempts!`) 
+      } else {
+       result = (`Congrats! You guessed the number in ${this.prevGuesses.length} attempts!`) 
     }
     alert(result)
   }
